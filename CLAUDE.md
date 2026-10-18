@@ -52,6 +52,9 @@ src/
     index.ts            Chỗ duy nhất tạo instance: `game`, `settings`, `audio` (và audio.bindGame(game))
     *.test.ts           FrameScheduler giả / storage giả, không cần trình duyệt
   assets/audio/  mp3 (hiệu ứng), opus + mp3 (nhạc lặp). Sinh lại placeholder: scripts/gen_placeholder_audio.py
+  assets/items/  Icon món hàng <itemId>.webp (128px, nền trong suốt); ItemIcon tự gom bằng import.meta.glob
+  assets/scene/  shop.webp (khung cảnh tiệm), counter.webp (tủ kính trước mặt khách)
+                 Ảnh AI gen gốc để trong scratch/ (gitignore), xử lý bằng scripts/process_generated_images.py
   content/    Nội dung game bằng JSON
     items.json, fillers.json, days/day-XX.json, random-visits.json, index.ts (gom bằng import.meta.glob)
   hooks/useStore.ts   useStore(controller, selector): đọc một phần state, chỉ re-render khi phần đó đổi
@@ -91,7 +94,8 @@ Vòng đời một khách (`CurrentVisit.status`):
 - Thiết kế cho điện thoại trước: rộng tối đa 440px, mục tiêu 390×844. Vùng chạm tối thiểu 44px.
 - Dùng token màu và class có sẵn trong `src/index.css`: `clay`, `btn-3d` (+ `btn-soft`, `btn-sun`), `bar`, các màu `paper/card/ink/leaf/tile/sun/sky/wood`. Không thêm màu literal mới nếu token đã có.
 - Font: `font-display` (Baloo 2) cho tiêu đề, mặc định là Be Vietnam Pro.
-- Không dùng emoji làm icon. Icon thì vẽ SVG inline, có `aria-hidden` hoặc `aria-label`.
+- Không dùng emoji làm icon. Icon giao diện thì vẽ SVG inline, có `aria-hidden` hoặc `aria-label`. Hình món hàng dùng `<ItemIcon id>` (ảnh trang trí, tên món luôn có chữ đi kèm).
+- Ảnh asset: WebP, nhỏ gọn (icon 128px, cảnh rộng 1074px = 3x của 358px), import qua Vite để `build:single` nhúng được.
 - Dùng `<button>` thật cho mọi thứ bấm được. Nút chỉ có icon phải có `aria-label`.
 - Chữ trên UI viết tiếng Việt, ngắn, nói theo góc nhìn người chơi.
 - Tôn trọng giảm chuyển động: cả `prefers-reduced-motion` của máy lẫn nút trong màn tạm dừng. Animation motion: dùng `useReducedMotionConfig()` (không dùng `useReducedMotion()`, hook đó bỏ qua cài đặt trong game). Animation CSS mới: thêm vào cả `@media (prefers-reduced-motion)` lẫn `:root[data-reduce-motion]` trong `index.css`.

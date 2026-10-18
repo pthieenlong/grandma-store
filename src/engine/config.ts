@@ -17,8 +17,8 @@ export const START_INVENTORY: Record<string, number> = {
 }
 
 export const FIRST_ARRIVAL_MS = 4_000 // khách đầu tiên tới sau khi mở cửa
-export const GAP_MIN_MS = 6_000 // khoảng nghỉ giữa 2 khách
-export const GAP_MAX_MS = 14_000
+export const GAP_MIN_MS = 2_000 // khoảng nghỉ giữa 2 khách (ngắn để quầy không trống lâu)
+export const GAP_MAX_MS = 5_000
 
 // Khách có tên được rải đều từ lúc mở cửa tới PLANNED_LAST_HOUR, nên dù tới trễ vẫn kịp trước khoảng 17h.
 export const PLANNED_LAST_HOUR = 16

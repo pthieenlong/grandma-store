@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { content } from '../../content'
 import { game } from '../../controllers'
 import { useStore } from '../../hooks/useStore'
+import { ItemIcon } from '../components/ItemIcon'
 import { PatienceBar } from '../components/PatienceBar'
 import { money } from '../format'
 
@@ -50,8 +51,8 @@ export function RestockSheet({ onClose }: Props) {
             const stock = inventory[item.id] ?? 0
             return (
               <li key={item.id} className="clay flex items-center gap-3 rounded-[22px]! p-3">
-                <div className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[#f1e2c4] font-display text-[13px] font-bold text-ink-soft shadow-[inset_0_-3px_0_var(--color-card-edge)]" aria-hidden="true">
-                  {item.name.split(' ')[0]}
+                <div className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[#f1e2c4] shadow-[inset_0_-3px_0_var(--color-card-edge)]" aria-hidden="true">
+                  <ItemIcon id={item.id} className="size-10" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-[15px] font-semibold">{item.name}</p>

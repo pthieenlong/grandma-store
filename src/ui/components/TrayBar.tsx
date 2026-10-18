@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { content } from '../../content'
 import type { ItemId, Tray } from '../../engine/types'
+import { ItemIcon } from './ItemIcon'
 
 type Props = { tray: Tray; onRemove: (id: ItemId) => void }
 
@@ -25,9 +26,10 @@ export function TrayBar({ tray, onRemove }: Props) {
             // Lúc biến mất dùng tween 150ms: spring dừng theo vận tốc nên đuôi kéo dài gần 1 giây, chip "ma" đứng lơ lửng
             exit={{ scale: 0.5, opacity: 0, transition: { duration: 0.15 } }}
             transition={{ type: 'spring', stiffness: 500, damping: 22 }}
-            className="rounded-full bg-[#eef5e6] px-3 py-1 text-[13px] font-semibold text-leaf-deep shadow-[inset_0_-2px_0_#cfe2bf]"
+            className="flex items-center gap-1 rounded-full bg-[#eef5e6] py-1 pr-3 pl-1.5 text-[13px] font-semibold text-leaf-deep shadow-[inset_0_-2px_0_#cfe2bf]"
             aria-label={`Bớt 1 ${content.items[id]?.name ?? id}`}
           >
+            <ItemIcon id={id} className="size-5" />
             {content.items[id]?.name ?? id} × {qty}
           </motion.button>
         ))}

@@ -98,8 +98,9 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 |---|---|---|
 | Từng khách một | Không dồn dập 2–3 khách cùng lúc. Tối đa 1 khách ở quầy. | Long |
 | Có thanh kiên nhẫn | Mỗi khách có `patienceMs` riêng (12–25 giây). Hết kiên nhẫn thì bỏ về. | Long |
-| Khoảng nghỉ giữa 2 khách | Khách đầu tới sau 4 giây, sau đó cách nhau 6–14 giây (ngẫu nhiên). | Claude (mặc định) |
-| Khách tới liên tục | Quầy trống là có khách tiếp, khoảng 15 khách/ngày. Không còn "hết khách". | Long |
+| Khoảng nghỉ giữa 2 khách | Khách đầu tới sau 4 giây, sau đó cách nhau 2–5 giây (ngẫu nhiên). Trước đây 6–14 giây: chơi thử thấy quầy trống gần nửa thời gian. Rút ngày không giúp vì tỉ lệ trống tính theo từng lượt khách. | Long (chọn giảm gap), Claude (con số) |
+| Khách tới liên tục | Quầy trống là có khách tiếp, khoảng 20–25 khách/ngày (ước lượng, chưa đo). Không còn "hết khách". | Long |
+| Quầy trống giữa 2 khách | Để cảnh trống, không hiện chữ (trước là "Quầy đang vắng, khách sắp tới…": giọng hệ thống, lại nháy liên tục khi gap ngắn). Chỉ hiện "Sắp đóng cửa rồi" khi gần đóng cửa. | Long |
 | Khách vô danh lấp chỗ trống | Tự sinh từ `content/fillers.json`: tên vai (Bà bán xôi, Chú thợ hồ…), món ngẫu nhiên theo `weight`, câu thoại ghép từ mẫu (`{self}`, `{player}`, `{wants}`). **Không có story**, được lặp lại. | Long |
 | Khách vô danh mua gì | 1 món, 20% là 2 món (`FILLER_TWO_ITEMS_CHANCE`). Số lượng 1 tới `maxQty` của món. Kiên nhẫn 12–20 giây. | Claude (mặc định) |
 | Khách có tên rải đều trong ngày | Khách kịch bản + khách ngẫu nhiên có tên được lên lịch đều từ 6h tới 16h (`PLANNED_LAST_HOUR`), giữ thứ tự viết. Tới hạn trong 20 giây (`PLANNED_LOOKAHEAD_MS`) thì quầy chờ họ, không cho khách vô danh chen. Kết quả: khách có chuyện luôn tới trước khoảng 17h. | Long (chọn hướng), Claude (con số) |
@@ -169,12 +170,12 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 | Kỷ niệm về bà | Mới có nhãn trên UI, chưa có nội dung. |
 | Màn Làng (danh sách hộ + Gắn bó) | Có trong wireframe, chưa code. |
 | Lưu game | Chưa có. Tải lại trang là chơi lại từ đầu. |
-| Asset thật | Chưa có. Nhân vật đang là SVG tạm, âm thanh là placeholder tổng hợp. |
+| Asset thật | Đã có icon món hàng, khung cảnh tiệm, tủ kính. Nhân vật vẫn là SVG tạm, âm thanh là placeholder tổng hợp. |
 
 **Edge case đã ghi nhận, chưa xử lý:**
 - ~~Hết giờ mà khách mang story vẫn còn trong hàng đợi thì mất story đó.~~ Đã xử lý ở v0.4: khách có tên được lên lịch trước 16h.
 - Khách vô danh lặp tên khá nhiều trong một ngày (8 vai, khoảng 9–10 lượt), câu chào chỉ có 4 mẫu. Thêm vai và mẫu câu trong `fillers.json` khi thấy nhàm.
-- Kinh tế: khách gấp đôi nên doanh thu/ngày gần gấp đôi v0.3. Chưa chỉnh lại giá hay tiền khởi đầu.
+- Kinh tế: khách gấp đôi nên doanh thu/ngày gần gấp đôi v0.3, sau khi giảm gap còn tăng thêm (khoảng 20–25 khách/ngày). Chưa chỉnh lại giá hay tiền khởi đầu. Hàng cũng hết nhanh hơn.
 - Câu thoại dài (vd chú Tám) có thể khó đọc khi đang vội. Cách nhẹ nhất nếu thấy bực: in đậm tên món trong câu.
 
 **Lỗi đã biết:**
@@ -192,6 +193,9 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 | Thứ tự | Wireframe → cơ chế dùng placeholder → chơi thử thấy ổn → **mới gen asset thật**, để không phải gen lại khi layout đổi. | Claude đề xuất, Long đồng ý |
 | Giữ nhân vật nhất quán | Làm "style bible": prompt nền cố định, bảng màu, mỗi NPC một ảnh reference, luôn gen dựa trên reference đó. | Claude đề xuất |
 | Animation bằng `motion` | Khách đi vào/ra, lắc khi đưa nhầm, nhảy khi mua được, tiền bay lên, chip khay nảy, màn nhập hàng trượt lên. Gắn lên khung bọc nhân vật (`Customer.tsx`), không vào trong SVG, để thay asset thật vẫn dùng được. `MotionConfig reducedMotion="user"`. | Long (chọn thư viện), Claude (chi tiết) |
+| Asset AI gen đầu tiên (Gemini) | Bộ icon 9 món (phong cách đất sét, khớp UI) dùng ở kệ hàng, khay, màn nhập hàng; món hết hàng thì icon xám. Khung cảnh tiệm (render 3D, ánh sáng ban ngày) thay trời/đồi/mái hiên vẽ bằng CSS, cả ở màn mở đầu. Tủ kính làm quầy trước mặt khách. Xử lý bằng `scripts/process_generated_images.py`: tách nền trắng (flood fill từ mép), cắt bỏ watermark Gemini, tô vách sau kính thành nâu gỗ, xuất WebP (~75KB tổng). | Long (chọn dùng), Claude (xử lý) |
+| Giờ trong ngày trên khung cảnh ảnh | 3 lớp màu `mix-blend-mode: multiply` (rạng sáng, chiều tà, chạng vạng) phủ lên ảnh, đậm nhạt theo giờ. Khách không bị phủ (như có đèn trong tiệm). Mất mặt trời đi vòng cung của bản CSS. | Long |
+| Phong cách nhân vật khi gen | Nên theo phong cách đất sét như bộ icon (khớp UI), không theo render 3D của khung cảnh. | Claude đề xuất |
 | Biểu cảm tối thiểu | Mỗi NPC 3 biểu cảm (vui / bình thường / phật ý), vì biểu cảm là kênh phản hồi chính khi kết quả bị ẩn. | Claude đề xuất |
 
 **Công cụ gợi ý:** Leonardo AI (character sheet, có gói free), Midjourney (`--cref`), Nano Banana Pro; Photopea hoặc Krita để tách nền; Figma để mock UI; Google Fonts (nhớ chọn font có tiếng Việt).
@@ -235,7 +239,7 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 | v0.1 | Vòng lặp 1 ngày: khách tới từng người, kiên nhẫn, nút "Bán", nhập hàng, tổng kết. 3 ngày kịch bản. |
 | v0.2 | Bỏ nút "Bán": tự chọn món trên kệ, khay, đưa hàng. Đọc yêu cầu qua câu thoại. Đưa nhầm bị phạt kiên nhẫn. |
 | v0.3 | Bán thành công thì khách kể chuyện, 3 câu trả lời. 12 câu chuyện. Mục "Chuyện hôm nay". |
-| v0.4 (đang làm) | Đồng hồ 6h–20h, trời đổi màu theo giờ. Khách tới liên tục (khách vô danh tự sinh), khách có chuyện rải đều trước 17h, ẩn số khách. Animation bằng `motion`. Chuyển sang kiến trúc controller, tách ShopScreen để render theo từng phần (bước 2/4, render nhanh hơn khoảng 7 lần). Màn mở đầu, màn tạm dừng, SettingsController (bước 3/4). Âm thanh placeholder bằng Howler (bước 4/4). |
+| v0.4 (đang làm) | Đồng hồ 6h–20h, trời đổi màu theo giờ. Khách tới liên tục (khách vô danh tự sinh), khách có chuyện rải đều trước 17h, ẩn số khách. Animation bằng `motion`. Chuyển sang kiến trúc controller, tách ShopScreen để render theo từng phần (bước 2/4, render nhanh hơn khoảng 7 lần). Màn mở đầu, màn tạm dừng, SettingsController (bước 3/4). Âm thanh placeholder bằng Howler (bước 4/4). Asset AI gen đầu tiên: icon món hàng, khung cảnh tiệm, tủ kính. |
 
 ---
 
