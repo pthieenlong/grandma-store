@@ -1,0 +1,52 @@
+{
+  "customers": [
+    { "name": "Bà bán xôi", "self": "bà", "player": "con" },
+    { "name": "Ông chạy ba gác", "self": "ông", "player": "con" },
+    { "name": "Chú thợ hồ", "self": "chú", "player": "con" },
+    { "name": "Dì làm ruộng", "self": "dì", "player": "con" },
+    { "name": "Cô hàng bông", "self": "cô", "player": "con" },
+    { "name": "Anh chạy ghe", "self": "anh", "player": "em" },
+    { "name": "Chị đi chợ sớm", "self": "chị", "player": "em" },
+    { "name": "Con nhỏ xóm dưới", "self": "con", "player": "anh" }
+  ],
+  "items": {
+    "mi-goi": { "weight": 4, "maxQty": 5 },
+    "gao": { "weight": 3, "maxQty": 5 },
+    "keo-me": { "weight": 3, "maxQty": 5 },
+    "nuoc-mam": { "weight": 2, "maxQty": 2 },
+    "nhang": { "weight": 2, "maxQty": 2 },
+    "banh-trang": { "weight": 2, "maxQty": 3 },
+    "dau-an": { "weight": 1, "maxQty": 1 },
+    "vo": { "weight": 1, "maxQty": 3 },
+    "dau-gio": { "weight": 1, "maxQty": 1 }
+  },
+  "lines": {
+    "greet": [
+      "Bán {self} {wants} nghen {player}.",
+      "{player} ơi, lấy {self} {wants} coi.",
+      "Cho {self} {wants} đi {player}, lẹ lẹ giùm nghen.",
+      "Tiệm còn hàng hông {player}? Bán {self} {wants}."
+    ],
+    "thanks": [
+      "Cảm ơn {player} nghen.",
+      "Rồi, {self} về nấu cơm đây.",
+      "Được rồi, mai {self} ghé nữa.",
+      "Tiệm vẫn đủ đồ như hồi bà còn ha. Cảm ơn {player}."
+    ],
+    "outOfStock": [
+      "Hết rồi hả? Thôi để {self} chạy lên chợ huyện.",
+      "Vậy hả, thôi bữa khác {self} ghé.",
+      "Trời, hết thiệt hả {player}? Thôi được."
+    ],
+    "leftAngry": [
+      "Lâu quá, thôi {self} đi à.",
+      "{self} còn việc, hổng chờ nổi nữa {player} ơi.",
+      "Thôi thôi, để {self} lên chợ mua cho rồi."
+    ],
+    "wrongItem": [
+      "Hổng phải, {self} mua {wants} mà {player}.",
+      "Lộn rồi {player} ơi, {wants} kìa.",
+      "Ủa, {self} kêu {wants} mà."
+    ]
+  }
+}

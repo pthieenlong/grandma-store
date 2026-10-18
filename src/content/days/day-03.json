@@ -1,0 +1,133 @@
+{
+  "day": 3,
+  "randomCount": 3,
+  "visits": [
+    {
+      "id": "anh-sau-d3",
+      "customer": "Anh Sáu",
+      "wants": [
+        {
+          "itemId": "gao",
+          "maxQty": 5
+        },
+        {
+          "itemId": "mi-goi",
+          "maxQty": 5
+        }
+      ],
+      "patienceMs": 20000,
+      "lines": {
+        "greet": "Mai anh đi làm thuê trên huyện mấy bữa. Bán anh gạo với mì, mỗi thứ tối đa năm.",
+        "thanks": "Đủ ăn rồi. Ở nhà coi giùm anh mấy đứa nhỏ trong xóm nha.",
+        "outOfStock": "Không có gì hết trơn vậy? Thôi anh ra chợ.",
+        "leftAngry": "Trễ xe rồi, anh đi đây!",
+        "wrongItem": "Gạo với mì! Mỗi thứ tối đa năm, nhanh giùm anh."
+      },
+      "story": {
+        "text": "Thiệt ra anh lên huyện là để gặp mấy người bên công ty du lịch gì đó. Họ nói đất nhà anh có giá lắm.",
+        "choices": [
+          {
+            "text": "Anh cứ nghe thử họ nói gì.",
+            "reply": "Ờ, nghe thôi chớ chưa ký gì đâu."
+          },
+          {
+            "text": "Anh đừng vội ký gì hết nha.",
+            "reply": "Anh biết rồi. Mà… tiền nhiều thiệt đó em."
+          },
+          {
+            "text": "Anh có muốn đi thiệt không?",
+            "reply": "Anh cũng không biết nữa. Ở đây có ruộng, có mồ mả ông bà…"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ba-tu-d3",
+      "customer": "Bà Tư",
+      "wants": [
+        {
+          "itemId": "nhang",
+          "maxQty": 1
+        }
+      ],
+      "patienceMs": 22000,
+      "lines": {
+        "greet": "Bán bà một bó nhang. Mai giỗ ông nhà bà rồi.",
+        "thanks": "Cảm ơn con. Mai qua ăn giỗ với bà nghen.",
+        "outOfStock": "Hết nhang thì bà biết lấy gì cúng ông đây…",
+        "leftAngry": "Thôi bà qua nhà con Năm hỏi xin vậy.",
+        "wrongItem": "Nhang con, một bó nhang thôi."
+      },
+      "story": {
+        "text": "Ông nhà bà mất mười năm rồi. Năm nào giỗ, bà ngoại con cũng qua phụ bà nấu nồi canh chua. Năm nay chắc thiếu vị.",
+        "choices": [
+          {
+            "text": "Mai con qua phụ bà nha.",
+            "reply": "Con biết nấu hả? Thôi qua đi, bà chỉ cho. Món này bà con nấu ngon nhất làng."
+          },
+          {
+            "text": "Bà còn nhớ cách bà con nấu không?",
+            "reply": "Nhớ chớ, nằm trong đầu bà nè. Mai bà đọc cho con chép."
+          },
+          {
+            "text": "Mai tiệm đông, chắc con không qua được bà ơi.",
+            "reply": "Ừ, không sao. Lo làm ăn là phải."
+          }
+        ]
+      }
+    },
+    {
+      "id": "di-nam-d3",
+      "customer": "Dì Năm",
+      "wants": [
+        {
+          "itemId": "dau-an",
+          "maxQty": 1
+        }
+      ],
+      "patienceMs": 20000,
+      "lines": {
+        "greet": "Mai đám giỗ nhà bà Tư, dì phụ nấu. Bán dì chai dầu ăn.",
+        "thanks": "Mai qua ăn nha, đồ ăn dì nấu ngon số một làng này đó.",
+        "outOfStock": "Hết dầu ăn? Vậy mai chiên bằng gì trời…",
+        "leftAngry": "Dì còn đi chợ lo đồ cúng, thôi dì đi.",
+        "wrongItem": "Dầu ăn, một chai dầu ăn. Đúng là dân Sài Gòn mới về."
+      },
+      "story": {
+        "text": "Mà con nghe gì chưa? Có người tới hỏi mua đất nhà anh Sáu, trả giá cao dữ lắm. Ảnh đang tính đó.",
+        "choices": [
+          {
+            "text": "Giá cao thì bán cũng phải dì.",
+            "reply": "Ờ… cũng phải. Ai mà chê tiền."
+          },
+          {
+            "text": "Ai hỏi mua vậy dì? Công ty nào?",
+            "reply": "Dì đâu biết, thấy đi xe hơi đen, mặc vest. Lạ hoắc à."
+          },
+          {
+            "text": "Anh Sáu mà đi thì xóm buồn lắm.",
+            "reply": "Thì vậy đó. Mai dì qua nói chuyện với ảnh coi."
+          }
+        ]
+      }
+    },
+    {
+      "id": "co-hai-d3",
+      "customer": "Cô Hai",
+      "wants": [
+        {
+          "itemId": "mi-goi",
+          "maxQty": 4
+        }
+      ],
+      "patienceMs": 25000,
+      "lines": {
+        "greet": "Con ơi, bán cô mấy gói mì. Còn nhiêu cô lấy nhiêu, tối đa 4 gói thôi.",
+        "thanks": "Mấy bữa nay có tiệm mở lại, đỡ phải chạy ra chợ huyện ghê.",
+        "outOfStock": "Hết mì nữa hả… Con nhập hàng thêm đi nha.",
+        "leftAngry": "Thôi cô đi, nồi cơm khét rồi!",
+        "wrongItem": "Mì gói con ơi, tối đa 4 gói."
+      }
+    }
+  ]
+}

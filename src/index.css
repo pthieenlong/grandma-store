@@ -1,0 +1,245 @@
+@import 'tailwindcss';
+
+/*
+ * Hướng thiết kế: "đất sét ấm" — mọi bề mặt như được nặn bằng đất sét, bo tròn dày,
+ * có mép dưới đổ bóng để trông nổi 3D. Màu lấy từ quê: giấy dó, lá chuối, ngói, trời chiều.
+ * Game cố ý chỉ có 1 giao diện sáng (thế giới ban ngày ấm áp), nên không có dark mode.
+ */
+@theme {
+  --color-paper: #f6ebd3; /* nền giấy dó */
+  --color-card: #fffaf0; /* bề mặt thẻ */
+  --color-card-edge: #e6d4b4; /* mép dưới của thẻ */
+  --color-ink: #4a3426; /* chữ nâu mực */
+  --color-ink-soft: #7a6150;
+  --color-leaf: #5e9b5a; /* lá chuối: hành động chính */
+  --color-leaf-deep: #3f7239;
+  --color-tile: #d9774a; /* ngói đỏ: cảnh báo, kiên nhẫn sắp hết */
+  --color-tile-deep: #a9532c;
+  --color-sun: #f2c35b; /* nắng: thời gian trong ngày */
+  --color-sun-deep: #c99528;
+  --color-sky: #cfe6e4; /* trời sau ô cửa (giữa ngày) */
+  --color-sky-dawn: #f7dcc0; /* trời rạng sáng */
+  --color-sky-dusk: #f2ae7e; /* trời chiều tà */
+  --color-sky-night: #5f5a8c; /* chạng vạng, phủ mờ lên trời và đồi */
+  --color-wood: #b07a4f; /* quầy gỗ */
+  --color-wood-deep: #8a5a36;
+
+  --font-display: 'Baloo 2', 'Be Vietnam Pro', ui-rounded, system-ui, sans-serif;
+  --font-body: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+@layer components {
+  /* Thẻ đất sét: highlight phía trên + mép dày phía dưới + bóng mềm */
+  .clay {
+    background: var(--color-card);
+    border-radius: 28px;
+    box-shadow:
+      inset 0 3px 0 rgb(255 255 255 / 0.9),
+      inset 0 -5px 0 rgb(74 52 38 / 0.05),
+      0 8px 0 -1px var(--color-card-edge),
+      0 18px 26px -12px rgb(74 52 38 / 0.35);
+  }
+
+  /* Nút bấm nổi: nhấn xuống thì lún */
+  .btn-3d {
+    --btn-bg: var(--color-leaf);
+    --btn-edge: var(--color-leaf-deep);
+    --btn-fg: #ffffff;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border-radius: 20px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    box-shadow:
+      inset 0 2px 0 rgb(255 255 255 / 0.35),
+      0 6px 0 var(--btn-edge),
+      0 12px 16px -8px rgb(74 52 38 / 0.45);
+    transition:
+      transform 90ms ease,
+      box-shadow 90ms ease;
+    touch-action: manipulation;
+  }
+  .btn-3d:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow:
+      inset 0 2px 0 rgb(255 255 255 / 0.35),
+      0 2px 0 var(--btn-edge),
+      0 4px 8px -4px rgb(74 52 38 / 0.45);
+  }
+  .btn-3d:disabled {
+    --btn-bg: #d9cdb8;
+    --btn-edge: #bfae92;
+    --btn-fg: #7a6150;
+    cursor: not-allowed;
+  }
+  .btn-3d:focus-visible {
+    outline: 3px solid var(--color-sun-deep);
+    outline-offset: 3px;
+  }
+  .btn-soft {
+    --btn-bg: var(--color-card);
+    --btn-edge: var(--color-card-edge);
+    --btn-fg: var(--color-ink);
+  }
+  .btn-sun {
+    --btn-bg: var(--color-sun);
+    --btn-edge: var(--color-sun-deep);
+    --btn-fg: var(--color-ink);
+  }
+
+  /* Thanh tiến độ dạng ống đất sét */
+  .bar {
+    height: 12px;
+    border-radius: 999px;
+    background: #ead9bb;
+    box-shadow: inset 0 2px 3px rgb(74 52 38 / 0.18);
+    overflow: hidden;
+  }
+  .bar > span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    box-shadow: inset 0 2px 0 rgb(255 255 255 / 0.45);
+    transition: width 120ms linear;
+  }
+
+  /* Thanh kéo (âm lượng): rãnh đất sét lõm giống .bar, núm tròn nổi.
+     Phần đã kéo tô màu lá nhờ biến --fill (0–100%) do component đặt. */
+  .range {
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  .range:disabled {
+    cursor: not-allowed;
+  }
+  .range::-webkit-slider-runnable-track {
+    height: 12px;
+    border-radius: 999px;
+    background: linear-gradient(to right, var(--color-leaf) var(--fill, 0%), #ead9bb var(--fill, 0%));
+    box-shadow: inset 0 2px 3px rgb(74 52 38 / 0.18);
+  }
+  .range::-moz-range-track {
+    height: 12px;
+    border-radius: 999px;
+    background: linear-gradient(to right, var(--color-leaf) var(--fill, 0%), #ead9bb var(--fill, 0%));
+    box-shadow: inset 0 2px 3px rgb(74 52 38 / 0.18);
+  }
+  .range::-webkit-slider-thumb {
+    appearance: none;
+    margin-top: -8px; /* căn núm 28px vào giữa rãnh 12px */
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--color-card);
+    box-shadow:
+      0 3px 0 var(--color-card-edge),
+      0 6px 10px -4px rgb(74 52 38 / 0.45);
+  }
+  .range::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--color-card);
+    box-shadow:
+      0 3px 0 var(--color-card-edge),
+      0 6px 10px -4px rgb(74 52 38 / 0.45);
+  }
+  .range:focus-visible {
+    outline: 3px solid var(--color-sun-deep);
+    outline-offset: 4px;
+    border-radius: 999px;
+  }
+
+  /* Thanh thời gian trong ngày: sọc chéo trôi sang phải cho có cảm giác thời gian đang chạy.
+     Sọc là background-image chồng lên màu nền (bg-sun); dịch background-position đúng 1 chu kỳ (16px) nên lặp liền mạch. */
+  .bar-running > span {
+    background-image: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.3) 25%,
+      transparent 25% 50%,
+      rgb(255 255 255 / 0.3) 50% 75%,
+      transparent 75%
+    );
+    background-size: 16px 16px;
+    animation: bar-run 0.9s linear infinite;
+  }
+  .bar-running[data-paused] > span {
+    animation-play-state: paused;
+  }
+
+  /* Mái hiên ngói đỏ hình vỏ sò */
+  .awning {
+    height: 34px;
+    background:
+      radial-gradient(circle at 50% 0, var(--color-tile) 17px, transparent 18px) 0 6px / 36px 34px repeat-x,
+      linear-gradient(var(--color-tile) 0 10px, transparent 10px);
+    filter: drop-shadow(0 4px 0 var(--color-tile-deep));
+  }
+}
+
+@keyframes bar-run {
+  to {
+    background-position: 16px 0;
+  }
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+.anim-bob {
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+/* Đồng hồ nhảy từng 10 phút: cho trời và mặt trời trượt mượt thay vì giật */
+.sky-layer {
+  transition:
+    background-color 1.2s linear,
+    opacity 1.2s linear,
+    left 1.2s linear,
+    top 1.2s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-bob,
+  .bar-running > span {
+    animation: none;
+  }
+  .bar > span,
+  .btn-3d,
+  .sky-layer {
+    transition: none;
+  }
+}
+/* Người chơi bật "Giảm chuyển động" trong màn tạm dừng (App gắn attribute này lên <html>) */
+:root[data-reduce-motion] :is(.anim-bob, .bar-running > span) {
+  animation: none;
+}
+:root[data-reduce-motion] :is(.bar > span, .btn-3d, .sky-layer) {
+  transition: none;
+}

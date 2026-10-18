@@ -1,0 +1,129 @@
+{
+  "day": 2,
+  "randomCount": 3,
+  "visits": [
+    {
+      "id": "chu-tam-d2",
+      "customer": "Chú Tám",
+      "wants": [
+        {
+          "itemId": "gao",
+          "maxQty": 3
+        }
+      ],
+      "patienceMs": 22000,
+      "lines": {
+        "greet": "Bán chú ba ký gạo. Mà nè, sáng nay có mấy người mặc áo sơ mi trắng đi đo đất ngoài đồng, không biết làm cái gì.",
+        "thanks": "Ờ, cảm ơn. Con để ý mấy người đó giùm chú nghen.",
+        "outOfStock": "Tiệm hết gạo luôn hả? Lạ ghê.",
+        "leftAngry": "Thôi chú về, trưa rồi.",
+        "wrongItem": "Gạo con, ba ký gạo. Lo nghe chuyện quá quên luôn hả?"
+      },
+      "story": {
+        "text": "Chú hỏi thì tụi nó nói đo đạc “quy hoạch”. Quy hoạch cái gì thì không nói. Con ở thành phố về, con biết mấy chuyện này hông?",
+        "choices": [
+          {
+            "text": "Để con tìm hiểu thử coi sao chú.",
+            "reply": "Ờ, nhờ con đó. Chú già rồi, đọc giấy tờ không nổi."
+          },
+          {
+            "text": "Chắc làm đường thôi chú, không có gì đâu.",
+            "reply": "Mong vậy. Có đường thì đi chợ cũng đỡ."
+          },
+          {
+            "text": "Nghe chữ “quy hoạch” là thấy không ổn rồi chú.",
+            "reply": "Chú cũng thấy vậy. Thôi, để chú hỏi thêm mấy nhà kia."
+          }
+        ]
+      }
+    },
+    {
+      "id": "di-nam-d2",
+      "customer": "Dì Năm",
+      "wants": [
+        {
+          "itemId": "banh-trang",
+          "maxQty": 4
+        }
+      ],
+      "patienceMs": 20000,
+      "lines": {
+        "greet": "Bánh tráng còn hông? Dì lấy bốn xấp, chiều nay cuốn cho tụi nhỏ ăn.",
+        "thanks": "Được, được. Bữa nào qua nhà dì ăn chung nghen.",
+        "outOfStock": "Hết hả? Vậy chiều nay ăn cơm không vậy.",
+        "leftAngry": "Dì đứng muốn rụng chưn luôn rồi nè.",
+        "wrongItem": "Bánh tráng chớ con, bốn xấp nha."
+      }
+    },
+    {
+      "id": "co-hai-d2",
+      "customer": "Cô Hai",
+      "wants": [
+        {
+          "itemId": "vo",
+          "maxQty": 2
+        }
+      ],
+      "patienceMs": 25000,
+      "lines": {
+        "greet": "Thằng Bin nhà cô hết vở rồi. Bán cô hai cuốn nha con.",
+        "thanks": "Ráng học cho giỏi như anh Sài Gòn nè, cô nói nó vậy đó.",
+        "outOfStock": "Hết vở rồi hả… Thôi để nó viết đỡ mặt sau.",
+        "leftAngry": "Cô còn phải đón thằng Bin, thôi cô đi.",
+        "wrongItem": "Vở học trò con ơi, hai cuốn thôi."
+      },
+      "story": {
+        "text": "Thằng Bin nó nói lớn lên nó muốn lên Sài Gòn như con. Cô nghe mà vừa mừng vừa lo.",
+        "choices": [
+          {
+            "text": "Cho nó đi đi cô, trên đó nhiều cơ hội lắm.",
+            "reply": "Ừ… chắc vậy. Cô chỉ sợ nó đi rồi không về."
+          },
+          {
+            "text": "Trên đó không sướng như nó tưởng đâu cô.",
+            "reply": "Cô cũng nói vậy mà nó đâu có nghe."
+          },
+          {
+            "text": "Khi nào rảnh con kèm nó học thêm cho.",
+            "reply": "Thiệt hông? Vậy cô đỡ lo biết mấy."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ong-bay-d2",
+      "customer": "Ông Bảy",
+      "wants": [
+        {
+          "itemId": "nuoc-mam",
+          "maxQty": 1
+        }
+      ],
+      "patienceMs": 22000,
+      "lines": {
+        "greet": "Một chai nước mắm. Hồi đó bà bây hay để dành cho ông chai ngon nhất.",
+        "thanks": "Ừ. Chai này cũng được.",
+        "outOfStock": "Hết rồi hả. Ờ, thôi.",
+        "leftAngry": "Già rồi, đứng lâu không nổi đâu con.",
+        "wrongItem": "Ông nói nước mắm. Một chai."
+      },
+      "story": {
+        "text": "Hồi đó tiệm này đông lắm, chiều nào cũng có bàn cờ tướng trước hiên. Giờ vắng hoe, ai cũng lên thành phố hết.",
+        "choices": [
+          {
+            "text": "Hay con kê lại bàn cờ trước hiên, ông thấy sao?",
+            "reply": "Bây biết đánh cờ hả? Mai ông qua thử tay nghề coi."
+          },
+          {
+            "text": "Thời thế thay đổi rồi ông.",
+            "reply": "Ừ, thay đổi… mà không biết có tốt hơn không."
+          },
+          {
+            "text": "Hồi đó ông có thắng bà con ván nào không?",
+            "reply": "Hà! Bà bây đánh cờ còn hay hơn ông. Thua hoài à."
+          }
+        ]
+      }
+    }
+  ]
+}

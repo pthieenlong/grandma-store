@@ -1,0 +1,11 @@
+[
+  { "id": "mi-goi", "name": "Mì gói", "buyPrice": 3500, "sellPrice": 5000, "unit": "gói", "noun": "mì" },
+  { "id": "nuoc-mam", "name": "Nước mắm", "buyPrice": 20000, "sellPrice": 26000, "unit": "chai", "noun": "nước mắm" },
+  { "id": "gao", "name": "Gạo (kg)", "buyPrice": 16000, "sellPrice": 19000, "unit": "ký", "noun": "gạo" },
+  { "id": "dau-an", "name": "Dầu ăn", "buyPrice": 38000, "sellPrice": 45000, "unit": "chai", "noun": "dầu ăn" },
+  { "id": "keo-me", "name": "Kẹo me", "buyPrice": 1000, "sellPrice": 2000, "unit": "cục", "noun": "kẹo me" },
+  { "id": "nhang", "name": "Nhang (bó)", "buyPrice": 8000, "sellPrice": 12000, "unit": "bó", "noun": "nhang" },
+  { "id": "vo", "name": "Vở học trò", "buyPrice": 6000, "sellPrice": 8000, "unit": "cuốn", "noun": "vở" },
+  { "id": "dau-gio", "name": "Dầu gió", "buyPrice": 12000, "sellPrice": 16000, "unit": "chai", "noun": "dầu gió" },
+  { "id": "banh-trang", "name": "Bánh tráng", "buyPrice": 10000, "sellPrice": 14000, "unit": "xấp", "noun": "bánh tráng" }
+]

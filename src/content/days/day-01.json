@@ -1,0 +1,129 @@
+{
+  "day": 1,
+  "randomCount": 2,
+  "visits": [
+    {
+      "id": "co-hai-d1",
+      "customer": "Cô Hai",
+      "wants": [
+        {
+          "itemId": "mi-goi",
+          "maxQty": 3
+        }
+      ],
+      "patienceMs": 25000,
+      "lines": {
+        "greet": "Ủa, con là cháu ngoại bà phải hông? Trời đất, lớn dữ vậy! Bán cô mấy gói mì nghen, tối đa 3 gói.",
+        "thanks": "Giỏi quá. Đứng quầy y chang bà ngoại con hồi đó.",
+        "outOfStock": "Hết mì rồi hả? Thôi bữa khác cô ghé.",
+        "leftAngry": "Đứng nãy giờ mỏi chưn quá, thôi cô về nấu cơm.",
+        "wrongItem": "Ủa, cô hỏi mì mà con. Mì gói đó, tối đa 3 gói thôi."
+      },
+      "story": {
+        "text": "Hồi con còn nhỏ, mỗi lần về quê là đứng sau quầy này giành bán kẹo với bà. Bà hay nói: “Thằng này lớn lên chắc làm chủ tiệm.” Ai dè làm thiệt.",
+        "choices": [
+          {
+            "text": "Con cũng không ngờ luôn đó cô.",
+            "reply": "Thôi, ráng giữ tiệm nghen. Có gì cần cứ kêu cô."
+          },
+          {
+            "text": "Chắc con chỉ ở tạm một thời gian thôi cô.",
+            "reply": "Ờ… ừ. Ở được bao lâu hay bấy lâu, cô mừng rồi."
+          },
+          {
+            "text": "Cô còn nhớ gì về bà nữa không, kể con nghe với?",
+            "reply": "Nhiều lắm con. Bữa nào rảnh cô ngồi kể, kể tới khuya luôn."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ong-bay-d1",
+      "customer": "Ông Bảy",
+      "wants": [
+        {
+          "itemId": "nhang",
+          "maxQty": 2
+        }
+      ],
+      "patienceMs": 22000,
+      "lines": {
+        "greet": "Bán ông hai bó nhang. Mai ông qua thắp cho bà ngoại bây một cây.",
+        "thanks": "Ừ. Tiệm còn mở là bà bây vui rồi.",
+        "outOfStock": "Hết nhang à… Thôi, để ông ra chợ huyện.",
+        "leftAngry": "Thằng nhỏ này lo ngó đâu đâu. Thôi ông đi.",
+        "wrongItem": "Nhang! Hai bó nhang. Tai bây có nghe hông đó?"
+      },
+      "story": {
+        "text": "Bà ngoại bây với ông là bạn từ hồi còn chăn trâu. Đám tang bà, ông nằm viện nên không đi được. Tới giờ ông vẫn thấy có lỗi.",
+        "choices": [
+          {
+            "text": "Bà hiểu mà ông, ông đừng nghĩ nhiều.",
+            "reply": "Ừ… mong là vậy."
+          },
+          {
+            "text": "Mai con thắp nhang chung với ông nha.",
+            "reply": "Được. Sáng sớm ông qua, bây pha giùm ông bình trà."
+          },
+          {
+            "text": "(Im lặng, rót cho ông ly nước)",
+            "reply": "…Cảm ơn bây. Giống bà bây ghê, không nói mà biết người ta cần gì."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ba-tu-d1",
+      "customer": "Bà Tư",
+      "wants": [
+        {
+          "itemId": "dau-gio",
+          "maxQty": 1
+        }
+      ],
+      "patienceMs": 20000,
+      "lines": {
+        "greet": "Có dầu gió hông con? Bà nhức đầu quá trời.",
+        "thanks": "Cảm ơn con. Ngoan dữ.",
+        "outOfStock": "Không có hả… Thôi bà về nằm nghỉ vậy.",
+        "leftAngry": "Bà nhức đầu mà con để bà chờ hoài.",
+        "wrongItem": "Không phải cái này con ơi, bà cần dầu gió."
+      }
+    },
+    {
+      "id": "anh-sau-d1",
+      "customer": "Anh Sáu",
+      "wants": [
+        {
+          "itemId": "nuoc-mam",
+          "maxQty": 2
+        }
+      ],
+      "patienceMs": 18000,
+      "lines": {
+        "greet": "Ê, Sài Gòn về hả? Bán anh chai nước mắm, hai chai càng tốt.",
+        "thanks": "Được đó. Ở lại lâu lâu nha, làng dạo này buồn hiu.",
+        "outOfStock": "Hết nước mắm? Tiệm tạp hoá gì kỳ vậy trời.",
+        "leftAngry": "Thôi, anh còn ra ruộng.",
+        "wrongItem": "Nước mắm mà, ông em ơi. Một hai chai gì cũng được."
+      },
+      "story": {
+        "text": "Mà nè, nghe nói trên Sài Gòn lương cao lắm phải hông? Anh tính lên đó kiếm việc, ở đây làm ruộng hoài cũng vậy.",
+        "choices": [
+          {
+            "text": "Cao thiệt, mà xài cũng hết anh ơi.",
+            "reply": "Hà, vậy ra cũng như nhau. Để anh tính lại."
+          },
+          {
+            "text": "Anh lên đi, có gì em chỉ chỗ cho.",
+            "reply": "Được! Có người quen là đỡ rồi. Cảm ơn nha."
+          },
+          {
+            "text": "Em về đây là vì ở trên đó mệt quá đó anh.",
+            "reply": "Vậy hả… Anh tưởng ai lên đó cũng sướng."
+          }
+        ]
+      }
+    }
+  ]
+}

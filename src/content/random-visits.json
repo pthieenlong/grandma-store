@@ -1,0 +1,187 @@
+[
+  {
+    "id": "thang-ti",
+    "customer": "Thằng Tí",
+    "weight": 3,
+    "wants": [
+      {
+        "itemId": "keo-me",
+        "maxQty": 5
+      }
+    ],
+    "patienceMs": 15000,
+    "lines": {
+      "greet": "Con có hai ngàn nè… À lộn, có mười ngàn! Bán con kẹo me, năm cục luôn!",
+      "thanks": "Hí hí! Mai con dắt tụi bạn tới nữa!",
+      "outOfStock": "Hết kẹo rồi hả?! Huhuhu…",
+      "leftAngry": "Lâu quá à, con đi bắn bi đây!",
+      "wrongItem": "Hổng phải! Kẹo me, kẹo me á!"
+    },
+    "story": {
+      "text": "Anh ơi, hồi trước bà ngoại anh hay cho con kẹo không lấy tiền mỗi lần con được điểm mười. Bữa nay con được điểm mười nè!",
+      "choices": [
+        {
+          "text": "Giỏi quá, anh cho thêm một cục!",
+          "reply": "Hí hí! Anh giống bà y chang!"
+        },
+        {
+          "text": "Làm ăn là phải tính tiền chớ em.",
+          "reply": "Hứ… thôi được. Lần sau con được mười hai điểm luôn!"
+        },
+        {
+          "text": "Đưa anh coi bài kiểm tra đi.",
+          "reply": "Nè! Mười đỏ chót nè! Con khoe cả xóm rồi."
+        }
+      ]
+    }
+  },
+  {
+    "id": "ong-cau-ca",
+    "customer": "Ông đi câu",
+    "weight": 2,
+    "wants": [
+      {
+        "itemId": "mi-goi",
+        "maxQty": 2
+      }
+    ],
+    "patienceMs": 20000,
+    "lines": {
+      "greet": "Câu từ sáng tới giờ chưa dính con cá nào. Bán ông hai gói mì về ăn đỡ.",
+      "thanks": "Mai ông câu được con cá lóc bự, ông đem qua cho.",
+      "outOfStock": "Cá không có, mì cũng không có. Bữa nay xui thiệt.",
+      "leftAngry": "Thôi, ông ra câu tiếp.",
+      "wrongItem": "Mì gói, hai gói. Câu cá chứ ông đâu có câu cái này."
+    }
+  },
+  {
+    "id": "co-giao",
+    "customer": "Cô giáo trường làng",
+    "weight": 2,
+    "wants": [
+      {
+        "itemId": "vo",
+        "maxQty": 5
+      }
+    ],
+    "patienceMs": 22000,
+    "lines": {
+      "greet": "Mấy đứa nhỏ lớp cô hết vở. Có bao nhiêu cô lấy bấy nhiêu, tối đa năm cuốn.",
+      "thanks": "Cảm ơn em. Làng mình còn tiệm này là còn vui.",
+      "outOfStock": "Hết vở rồi à… Vậy cô cho tụi nhỏ viết bảng con vậy.",
+      "leftAngry": "Cô phải về lớp rồi, tụi nhỏ quậy mất.",
+      "wrongItem": "Vở học trò em ơi, tối đa năm cuốn."
+    },
+    "story": {
+      "text": "Năm nay lớp cô còn có mười hai đứa. Năm sau chắc ít hơn, nhà nào cũng tính dọn đi.",
+      "choices": [
+        {
+          "text": "Trường làng mà đóng thì tiếc lắm cô.",
+          "reply": "Ừ. Cô dạy ở đây hai mươi năm rồi."
+        },
+        {
+          "text": "Lên thành phố tụi nhỏ học tốt hơn mà cô.",
+          "reply": "Cũng đúng… nhưng cô vẫn buồn."
+        },
+        {
+          "text": "Bữa nào em qua kể chuyện Sài Gòn cho tụi nhỏ nghe nha cô.",
+          "reply": "Hay đó! Tụi nhỏ mê lắm, cô sắp xếp liền."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chu-xe-om",
+    "customer": "Chú xe ôm",
+    "weight": 2,
+    "wants": [
+      {
+        "itemId": "dau-gio",
+        "maxQty": 1
+      }
+    ],
+    "patienceMs": 16000,
+    "lines": {
+      "greet": "Chạy cả ngày nhức mình quá. Có dầu gió hông con?",
+      "thanks": "Ngon. Có cần đi đâu thì kêu chú, chú chở rẻ.",
+      "outOfStock": "Hông có hả. Thôi về cạo gió bằng đồng xu vậy.",
+      "leftAngry": "Có khách gọi rồi, chú chạy đây!",
+      "wrongItem": "Dầu gió nè con, cạo gió chớ đâu phải ăn."
+    }
+  },
+  {
+    "id": "ba-hang-xom",
+    "customer": "Bà hàng xóm",
+    "weight": 2,
+    "wants": [
+      {
+        "itemId": "nhang",
+        "maxQty": 1
+      }
+    ],
+    "patienceMs": 20000,
+    "lines": {
+      "greet": "Nhà bà cúp điện, bán bà bó nhang… Ủa mà nhang đâu có sáng. Thôi kệ, bán đại đi con.",
+      "thanks": "Ờ, có còn hơn không!",
+      "outOfStock": "Hết nhang luôn. Bữa nay bà xui dữ.",
+      "leftAngry": "Tối thui rồi, bà về mò đường đây.",
+      "wrongItem": "Nhang! Bó nhang thôi mà."
+    }
+  },
+  {
+    "id": "chi-ve-so",
+    "customer": "Chị bán vé số",
+    "weight": 2,
+    "wants": [
+      {
+        "itemId": "banh-trang",
+        "maxQty": 2
+      }
+    ],
+    "patienceMs": 18000,
+    "lines": {
+      "greet": "Mua giùm chị tờ vé số hông em? Hông hả… Vậy bán chị hai xấp bánh tráng.",
+      "thanks": "Cảm ơn em. Lần sau mua vé số ủng hộ chị nha!",
+      "outOfStock": "Hết bánh tráng? Vậy mua vé số đi em, đổi vận nè!",
+      "leftAngry": "Chị còn đi bán, trễ xổ rồi!",
+      "wrongItem": "Bánh tráng em, hai xấp à."
+    }
+  },
+  {
+    "id": "nguoi-la-vest",
+    "customer": "Người lạ mặc vest",
+    "weight": 1,
+    "minDay": 2,
+    "wants": [
+      {
+        "itemId": "nuoc-mam",
+        "maxQty": 1
+      }
+    ],
+    "patienceMs": 12000,
+    "lines": {
+      "greet": "Chỗ này view đẹp ghê ha. Ờ… cho tôi chai nước. À, không có hả? Nước mắm cũng được.",
+      "thanks": "Cảm ơn. Tiệm này… cũng có giá đó.",
+      "outOfStock": "Không có gì hết. Đúng là cần đổi mới thiệt.",
+      "leftAngry": "Tôi không có nhiều thời gian đâu.",
+      "wrongItem": "Tôi nói nước mắm. Ở đây ai cũng chậm vậy à?"
+    },
+    "story": {
+      "text": "Cậu là chủ tiệm mới hả? Trẻ vậy mà về quê, lạ ghê. Tôi làm bên dự án. Đất chỗ này… tiềm năng lắm.",
+      "choices": [
+        {
+          "text": "Dự án gì vậy anh?",
+          "reply": "Rồi cậu sẽ biết. Tin vui cho cả làng đó."
+        },
+        {
+          "text": "Tôi không quan tâm đâu, cảm ơn.",
+          "reply": "Cứ giữ danh thiếp. Sớm muộn gì cũng cần."
+        },
+        {
+          "text": "Tiềm năng là sao anh?",
+          "reply": "Là… đẹp, rộng, gần sông. Cậu hiểu mà."
+        }
+      ]
+    }
+  }
+]
