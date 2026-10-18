@@ -3,6 +3,7 @@ import { content } from '../../content'
 import { game } from '../../controllers'
 import type { ItemId, Tray } from '../../engine/types'
 import { useStore } from '../../hooks/useStore'
+import { ItemIcon } from './ItemIcon'
 
 type Props = { tray: Tray; onAdd: (id: ItemId) => void; onOpenRestock: () => void }
 
@@ -30,11 +31,15 @@ export function Shelf({ tray, onAdd, onOpenRestock }: Props) {
               onClick={() => onAdd(item.id)}
               disabled={left <= 0}
               aria-label={`${item.name}, còn ${stock}${inTray ? `, trong khay ${inTray}` : ''}`}
-              className="btn-3d btn-soft relative flex min-h-[56px] flex-col items-center justify-center gap-0.5 rounded-2xl! px-1.5 py-2 font-body!"
+              className="btn-3d btn-soft relative flex min-h-[56px] items-center gap-1 rounded-2xl! py-1.5 pr-1.5 pl-1 text-left font-body!"
             >
-              <span className="text-[13px] leading-tight font-semibold">{item.name}</span>
-              <span className={`text-[11px] font-medium tabular-nums ${stock === 0 ? 'text-tile-deep' : 'text-ink-soft'}`}>
-                {stock === 0 ? 'hết hàng' : `còn ${left}`}
+              {/* Icon bên trái chữ (không xếp trên dưới) để nút giữ nguyên chiều cao, 3 hàng kệ vẫn vừa màn 844px */}
+              <ItemIcon id={item.id} className={`size-8 ${stock === 0 ? 'opacity-50 grayscale' : ''}`} />
+              <span className="flex min-w-0 flex-col gap-0.5">
+                <span className="text-[12px] leading-tight font-semibold">{item.name}</span>
+                <span className={`text-[11px] font-medium tabular-nums ${stock === 0 ? 'text-tile-deep' : 'text-ink-soft'}`}>
+                  {stock === 0 ? 'hết hàng' : `còn ${left}`}
+                </span>
               </span>
               {inTray > 0 && (
                 <motion.span

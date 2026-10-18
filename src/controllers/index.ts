@@ -13,3 +13,6 @@ export const audio = new AudioController(settings, audioSources)
 
 // Nối âm thanh với game một lần cho cả app. Chưa phát gì cho tới khi audio.start() (lúc bấm "Mở cửa tiệm").
 audio.bindGame(game)
+
+// Chỉ khi chạy dev: gõ `__game` trong Console của DevTools để xem/điều khiển state (vd __game.getSnapshot()).
+if (import.meta.env.DEV) Object.assign(globalThis, { __game: game, __settings: settings, __audio: audio })

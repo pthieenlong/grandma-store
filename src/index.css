@@ -187,15 +187,6 @@ body {
   .bar-running[data-paused] > span {
     animation-play-state: paused;
   }
-
-  /* Mái hiên ngói đỏ hình vỏ sò */
-  .awning {
-    height: 34px;
-    background:
-      radial-gradient(circle at 50% 0, var(--color-tile) 17px, transparent 18px) 0 6px / 36px 34px repeat-x,
-      linear-gradient(var(--color-tile) 0 10px, transparent 10px);
-    filter: drop-shadow(0 4px 0 var(--color-tile-deep));
-  }
 }
 
 @keyframes bar-run {
