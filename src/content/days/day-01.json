@@ -13,14 +13,14 @@
       ],
       "patienceMs": 25000,
       "lines": {
-        "greet": "Ủa, con là cháu ngoại bà phải hông? Trời đất, lớn dữ vậy! Bán cô mấy gói mì nghen, tối đa 3 gói.",
+        "greet": "Ủa, {name} đó hả? Bữa đám bà đông quá, cô chưa hỏi thăm con được. Bán cô mấy gói mì nghen, tối đa 3 gói.",
         "thanks": "Giỏi quá. Đứng quầy y chang bà ngoại con hồi đó.",
         "outOfStock": "Hết mì rồi hả? Thôi bữa khác cô ghé.",
         "leftAngry": "Đứng nãy giờ mỏi chưn quá, thôi cô về nấu cơm.",
         "wrongItem": "Ủa, cô hỏi mì mà con. Mì gói đó, tối đa 3 gói thôi."
       },
       "story": {
-        "text": "Hồi con còn nhỏ, mỗi lần về quê là đứng sau quầy này giành bán kẹo với bà. Bà hay nói: “Thằng này lớn lên chắc làm chủ tiệm.” Ai dè làm thiệt.",
+        "text": "Hồi con còn nhỏ, mỗi lần về quê là đứng sau quầy này giành bán kẹo với bà. Bà hay nói: “{Thằng|Con nhỏ} này lớn lên chắc làm chủ tiệm.” Ai dè làm thiệt.",
         "choices": [
           {
             "text": "Con cũng không ngờ luôn đó cô.",
@@ -51,7 +51,7 @@
         "greet": "Bán ông hai bó nhang. Mai ông qua thắp cho bà ngoại bây một cây.",
         "thanks": "Ừ. Tiệm còn mở là bà bây vui rồi.",
         "outOfStock": "Hết nhang à… Thôi, để ông ra chợ huyện.",
-        "leftAngry": "Thằng nhỏ này lo ngó đâu đâu. Thôi ông đi.",
+        "leftAngry": "{Thằng nhỏ|Con nhỏ} này lo ngó đâu đâu. Thôi ông đi.",
         "wrongItem": "Nhang! Hai bó nhang. Tai bây có nghe hông đó?"
       },
       "story": {
@@ -105,7 +105,7 @@
         "thanks": "Được đó. Ở lại lâu lâu nha, làng dạo này buồn hiu.",
         "outOfStock": "Hết nước mắm? Tiệm tạp hoá gì kỳ vậy trời.",
         "leftAngry": "Thôi, anh còn ra ruộng.",
-        "wrongItem": "Nước mắm mà, ông em ơi. Một hai chai gì cũng được."
+        "wrongItem": "Nước mắm mà, {ông nội|bà nội} ơi. Một hai chai gì cũng được."
       },
       "story": {
         "text": "Mà nè, nghe nói trên Sài Gòn lương cao lắm phải hông? Anh tính lên đó kiếm việc, ở đây làm ruộng hoài cũng vậy.",

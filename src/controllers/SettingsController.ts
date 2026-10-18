@@ -1,3 +1,4 @@
+import { browserStorage, type KeyValueStorage } from './storage'
 import { Store } from './Store'
 
 export type Settings = {
@@ -14,8 +15,7 @@ export const DEFAULT_SETTINGS: Settings = {
   reduceMotion: false,
 }
 
-/** Chỉ cần 2 hàm này của localStorage; test truyền bản giả. */
-export type KeyValueStorage = Pick<Storage, 'getItem' | 'setItem'>
+export type { KeyValueStorage } from './storage'
 
 const STORAGE_KEY = 'tiem-ba-ngoai:settings:v1'
 
@@ -36,15 +36,6 @@ function parseSettings(raw: string | null): Settings {
     }
   } catch {
     return DEFAULT_SETTINGS
-  }
-}
-
-/** localStorage có thể ném lỗi (chế độ ẩn danh, bị chặn) hoặc không tồn tại (lúc chạy test). */
-function browserStorage(): KeyValueStorage | null {
-  try {
-    return typeof localStorage === 'undefined' ? null : localStorage
-  } catch {
-    return null
   }
 }
 

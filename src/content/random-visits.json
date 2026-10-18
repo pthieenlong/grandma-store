@@ -18,18 +18,18 @@
       "wrongItem": "Hổng phải! Kẹo me, kẹo me á!"
     },
     "story": {
-      "text": "Anh ơi, hồi trước bà ngoại anh hay cho con kẹo không lấy tiền mỗi lần con được điểm mười. Bữa nay con được điểm mười nè!",
+      "text": "{Anh|Chị} ơi, hồi trước bà ngoại {anh|chị} hay cho con kẹo không lấy tiền mỗi lần con được điểm mười. Bữa nay con được điểm mười nè!",
       "choices": [
         {
-          "text": "Giỏi quá, anh cho thêm một cục!",
-          "reply": "Hí hí! Anh giống bà y chang!"
+          "text": "Giỏi quá, {anh|chị} cho thêm một cục!",
+          "reply": "Hí hí! {Anh|Chị} giống bà y chang!"
         },
         {
           "text": "Làm ăn là phải tính tiền chớ em.",
           "reply": "Hứ… thôi được. Lần sau con được mười hai điểm luôn!"
         },
         {
-          "text": "Đưa anh coi bài kiểm tra đi.",
+          "text": "Đưa {anh|chị} coi bài kiểm tra đi.",
           "reply": "Nè! Mười đỏ chót nè! Con khoe cả xóm rồi."
         }
       ]
@@ -167,11 +167,11 @@
       "wrongItem": "Tôi nói nước mắm. Ở đây ai cũng chậm vậy à?"
     },
     "story": {
-      "text": "Cậu là chủ tiệm mới hả? Trẻ vậy mà về quê, lạ ghê. Tôi làm bên dự án. Đất chỗ này… tiềm năng lắm.",
+      "text": "{Cậu|Cô} là chủ tiệm mới hả? Trẻ vậy mà về quê, lạ ghê. Tôi làm bên dự án. Đất chỗ này… tiềm năng lắm.",
       "choices": [
         {
           "text": "Dự án gì vậy anh?",
-          "reply": "Rồi cậu sẽ biết. Tin vui cho cả làng đó."
+          "reply": "Rồi {cậu|cô} sẽ biết. Tin vui cho cả làng đó."
         },
         {
           "text": "Tôi không quan tâm đâu, cảm ơn.",
@@ -179,7 +179,7 @@
         },
         {
           "text": "Tiềm năng là sao anh?",
-          "reply": "Là… đẹp, rộng, gần sông. Cậu hiểu mà."
+          "reply": "Là… đẹp, rộng, gần sông. {Cậu|Cô} hiểu mà."
         }
       ]
     }

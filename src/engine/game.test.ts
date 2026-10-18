@@ -3,6 +3,7 @@ import { clockMinutes, msAtHour, timeOfDay } from './clock'
 import { PLANNED_LAST_HOUR } from './config'
 import { describeWants, makeFiller } from './filler'
 import { createRng } from './rng'
+import { fromSave, parseSave, toSave } from './save'
 import { apologize, buildQueue, choose, give, newGame, nextDay, resolveGive, restock, setPaused, summarizeDay, tick, todayStories } from './game'
 import type { GameContent, GameState, VisitScript } from './types'
 
@@ -289,6 +290,21 @@ describe('khách vô danh', () => {
   })
 })
 
+describe('chỗ trống giới tính trong mẫu câu khách vô danh', () => {
+  it('makeFiller thay {self}/{player}/{wants} nhưng giữ {nam|nữ} và {name} để UI thay lúc hiển thị', () => {
+    const c: GameContent = {
+      ...content,
+      fillers: {
+        ...content.fillers,
+        customers: [{ name: 'Con nhỏ xóm dưới', self: 'con', player: '{anh|chị}' }],
+        lines: { ...content.fillers.lines, greet: ['{player} {name} ơi, bán {self} {wants}'] },
+      },
+    }
+    const f = makeFiller(createRng(1), 1, 0, c)
+    expect(f?.lines.greet).toMatch(/^\{anh\|chị\} \{name\} ơi, bán con /)
+  })
+})
+
 describe('lịch khách có tên', () => {
   const many: GameContent = {
     ...content,
@@ -394,5 +410,78 @@ describe('đồng hồ trong game', () => {
     expect(timeOfDay(11 * 60)).toBe('noon')
     expect(timeOfDay(13 * 60)).toBe('afternoon')
     expect(timeOfDay(18 * 60)).toBe('evening')
+  })
+})
+
+describe('lưu game', () => {
+  /** Bán 2 gói mì cho khách đầu tiên và nhập thêm 3 ký gạo: tiền và kho đã khác đầu ngày */
+  const midDay = () => {
+    let s = newGame(content, 5)
+    const r = restock(s, 'mi', 3, content)
+    if (r.ok) s = r.state
+    s = tick(s, s.nextArrivalInMs, content)
+    return give(s, { mi: 2 }, content)
+  }
+  /** Cho thời gian trôi tới khi đóng cửa (khách đang về thì engine chờ khách đi hẳn) */
+  const closeShop = (s: GameState) => {
+    for (let i = 0; i < 20 && s.phase === 'open'; i++) s = tick(s, 60_000, content)
+    return s
+  }
+  /** Kho giả của test chỉ có mì và gạo; START_INVENTORY dùng id thật nên fromSave bỏ bớt */
+  const known = (inv: GameState['inventory']) => ({ mi: inv.mi ?? 0, gao: inv.gao ?? 0 })
+
+  it('đang mở cửa thì lưu đầu ngày hôm nay, bỏ qua những gì đã bán/nhập', () => {
+    const start = newGame(content, 5)
+    const s = midDay()
+    expect(s.money).not.toBe(start.money)
+    expect(s.inventory).not.toEqual(start.inventory)
+    expect(toSave(s)).toEqual({ version: 1, seed: 5, day: 1, money: start.money, inventory: start.inventory })
+  })
+
+  it('buổi tối thì lưu đầu ngày mai, với tiền và kho cuối ngày', () => {
+    const night = closeShop(midDay())
+    expect(night.phase).toBe('night')
+    expect(toSave(night)).toMatchObject({ day: 2, money: night.money, inventory: night.inventory })
+  })
+
+  it('tối ngày cuối vẫn lưu đầu ngày cuối; hết game thì xoá bản lưu', () => {
+    const s = newGame(content, 5)
+    const lastNight = { ...s, day: s.lastDay, phase: 'night' as const, money: 999 }
+    expect(toSave(lastNight)).toMatchObject({ day: s.lastDay, money: s.startMoney })
+    expect(toSave({ ...s, phase: 'ended' })).toBeNull()
+  })
+
+  it('dựng lại đúng ngày đó: cùng lịch khách, tiền, kho như lần chơi trước', () => {
+    const night = closeShop(midDay())
+    const played = nextDay(night, content) // chơi tiếp bình thường, không tải lại
+    const save = toSave(night)
+    if (!save) throw new Error('phải có bản lưu')
+    const loaded = fromSave(parseSave(JSON.stringify(save))!, content)
+    expect(loaded).toEqual({ ...played, inventory: known(played.inventory), startInventory: known(played.inventory) })
+  })
+
+  it('món mới trong content thì kho = 0, món không còn trong content thì bỏ', () => {
+    const s = fromSave({ version: 1, seed: 1, day: 3, money: 100, inventory: { mi: 4, banh: 9 } }, content)
+    expect(s.inventory).toEqual({ mi: 4, gao: 0 })
+    expect(s.startInventory).toEqual(s.inventory)
+    expect(s.day).toBe(3)
+    expect(s.phase).toBe('open')
+  })
+
+  it('bản lưu hỏng hoặc sai version thì coi như chưa có', () => {
+    const ok = { version: 1, seed: 1, day: 2, money: 0, inventory: {} }
+    expect(parseSave(null)).toBeNull()
+    expect(parseSave('{hỏng')).toBeNull()
+    expect(parseSave('null')).toBeNull()
+    expect(parseSave(JSON.stringify({ ...ok, version: 2 }))).toBeNull()
+    expect(parseSave(JSON.stringify({ ...ok, day: 0 }))).toBeNull()
+    expect(parseSave(JSON.stringify({ ...ok, day: 999 }))).toBeNull()
+    expect(parseSave(JSON.stringify({ ...ok, money: 'nhiều' }))).toBeNull()
+    expect(parseSave(JSON.stringify(ok))).toEqual(ok)
+  })
+
+  it('món sai kiểu trong kho thì bỏ riêng món đó', () => {
+    const raw = JSON.stringify({ version: 1, seed: 1, day: 2, money: 0, inventory: { mi: 3, gao: -1, keo: 'x' } })
+    expect(parseSave(raw)?.inventory).toEqual({ mi: 3 })
   })
 })

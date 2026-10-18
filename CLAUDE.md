@@ -29,7 +29,7 @@ Sau mỗi thay đổi: `npx tsc -b && npm test`. Cả hai phải sạch.
 
 ## Stack
 
-Vite 8, React 19, TypeScript 6 (strict), Tailwind CSS v4 (cấu hình bằng `@theme` trong `src/index.css`, không có `tailwind.config.js`), Vitest, `motion` (animation), `howler` (âm thanh). Không có backend, không có router, không có thư viện state (tự viết `Store` + `useSyncExternalStore`). Chưa có lưu game.
+Vite 8, React 19, TypeScript 6 (strict), Tailwind CSS v4 (cấu hình bằng `@theme` trong `src/index.css`, không có `tailwind.config.js`), Vitest, `motion` (animation), `howler` (âm thanh). Không có backend, không có router, không có thư viện state (tự viết `Store` + `useSyncExternalStore`). Lưu game bằng localStorage, chỉ lưu đầu mỗi ngày.
 
 ## Kiến trúc
 
@@ -42,25 +42,29 @@ src/
     clock.ts      Giờ trong game (6h–20h) suy ra từ elapsedMs
     filler.ts     Sinh khách vô danh từ mẫu câu
     rng.ts        Ngẫu nhiên có seed (mulberry32), drawRandom cho rng lưu trong state
+    save.ts       toSave / fromSave / parseSave: bản lưu đầu ngày { seed, day, money, inventory }
     game.test.ts
   controllers/ "Vỏ" có state + side effect, viết bằng class, mỗi class một instance (singleton)
     Store.ts            Class cha: getSnapshot / subscribe / setState (hợp đồng của useSyncExternalStore)
     GameController.ts   Giữ GameState, chạy vòng lặp rAF (gom nhịp 100ms), tự tạm dừng khi app bị ẩn, method cho từng hành động, onOutcome
+    ProfileController.ts   Tên + giới tính người chơi, lưu localStorage riêng; cleanName()
     SettingsController.ts  Âm lượng nhạc/hiệu ứng, tắt tiếng, giảm chuyển động; lưu localStorage (phòng thủ khi bị chặn)
     AudioController.ts  Bọc Howler: hiệu ứng, nhạc nền crossfade, nghe GameController (Outcome → tiếng). Im lặng tới khi start() trong lần chạm đầu
+    SaveController.ts   Nghe game, ghi bản lưu khi sang ngày / đóng cửa / ván mới; restore() dựng lại GameState lúc tải trang
+    storage.ts          browserStorage(): localStorage đọc phòng thủ, dùng chung cho Settings và Save
     audioSources.ts     Danh sách file trong src/assets/audio/ (placeholder; thay file thật thì giữ nguyên tên)
-    index.ts            Chỗ duy nhất tạo instance: `game`, `settings`, `audio` (và audio.bindGame(game))
+    index.ts            Chỗ duy nhất tạo instance: `save`, `game` (dựng từ bản lưu nếu có), `settings`, `profile`, `audio`
     *.test.ts           FrameScheduler giả / storage giả, không cần trình duyệt
   assets/audio/  mp3 (hiệu ứng), opus + mp3 (nhạc lặp). Sinh lại placeholder: scripts/gen_placeholder_audio.py
   assets/items/  Icon món hàng <itemId>.webp (128px, nền trong suốt); ItemIcon tự gom bằng import.meta.glob
   assets/scene/  shop.webp (khung cảnh tiệm), counter.webp (tủ kính trước mặt khách)
                  Ảnh AI gen gốc để trong scratch/ (gitignore), xử lý bằng scripts/process_generated_images.py
   content/    Nội dung game bằng JSON
-    items.json, fillers.json, days/day-XX.json, random-visits.json, index.ts (gom bằng import.meta.glob)
+    items.json, fillers.json, days/day-XX.json, random-visits.json, scenes/intro.json, index.ts (gom bằng import.meta.glob)
   hooks/useStore.ts   useStore(controller, selector): đọc một phần state, chỉ re-render khi phần đó đổi
-  ui/         React components (screens/, components/, format.ts)
+  ui/         React components (screens/, components/, format.ts: money, hhmm, renderLine)
     selectors.ts  Selector dùng chung cho useStore (giờ game, biểu cảm, kiên nhẫn…)
-  App.tsx     Màn mở đầu (bấm "Mở cửa tiệm" mới game.start()) → chọn màn theo phase; MotionConfig theo cài đặt giảm chuyển động
+  App.tsx     Chọn màn: title → create (tạo nhân vật) → intro (SceneScreen) → game; vào game mới game.start(), rồi chọn màn theo phase → chọn màn theo phase; MotionConfig theo cài đặt giảm chuyển động
 ```
 
 Luồng dữ liệu: UI gọi method của controller (`game.give(tray)`) → controller gọi hàm thuần trong `game.ts` → lưu `GameState` mới bằng `setState` → component đang `useStore` được báo để render lại. Engine không biết controller tồn tại; content truyền vào constructor nên test dùng content giả được.
@@ -85,6 +89,7 @@ Vòng đời một khách (`CurrentVisit.status`):
 - Mỗi khách phải có đủ 5 câu: `greet`, `thanks`, `outOfStock`, `leftAngry`, `wrongItem`.
 - `greet` phải nói rõ món và số lượng tối đa, vì UI không liệt kê yêu cầu, người chơi chỉ đọc được từ câu này.
 - `wrongItem` nên nhắc lại món cần mua.
+- Xưng hô theo giới tính người chơi viết inline `{nam|nữ}` (vd `{Thằng|Con nhỏ} này`, `{anh|chị}`), tên người chơi là `{name}`. UI thay lúc hiển thị bằng `renderLine`; engine và `todayLog` giữ câu gốc. Đừng viết cứng "anh", "cậu", "thằng" khi nói về người chơi.
 - `story` (không bắt buộc): `text` + đúng 3 `choices`, mỗi choice có `text` và `reply`. Các lựa chọn phải đều hợp lý, không có câu nào rõ ràng là "đúng".
 - `id` khách phải duy nhất trên toàn bộ content (`findVisit` tìm theo id). Khách kịch bản đặt hậu tố ngày: `co-hai-d3`.
 - `itemId` phải tồn tại trong `items.json`.

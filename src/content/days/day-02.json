@@ -67,7 +67,7 @@
       "patienceMs": 25000,
       "lines": {
         "greet": "Thằng Bin nhà cô hết vở rồi. Bán cô hai cuốn nha con.",
-        "thanks": "Ráng học cho giỏi như anh Sài Gòn nè, cô nói nó vậy đó.",
+        "thanks": "Ráng học cho giỏi như {anh|chị} Sài Gòn nè, cô nói nó vậy đó.",
         "outOfStock": "Hết vở rồi hả… Thôi để nó viết đỡ mặt sau.",
         "leftAngry": "Cô còn phải đón thằng Bin, thôi cô đi.",
         "wrongItem": "Vở học trò con ơi, hai cuốn thôi."

@@ -105,6 +105,12 @@ body {
     --btn-edge: var(--color-sun-deep);
     --btn-fg: var(--color-ink);
   }
+  /* Hành động khó quay lại (xoá bản lưu) */
+  .btn-tile {
+    --btn-bg: var(--color-tile);
+    --btn-edge: var(--color-tile-deep);
+    --btn-fg: #ffffff;
+  }
 
   /* Thanh tiến độ dạng ống đất sét */
   .bar {

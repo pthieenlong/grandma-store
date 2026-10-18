@@ -34,8 +34,9 @@ export class GameController extends Store<GameState> {
   private lastFrameAt = 0
   private accumulatedMs = 0
 
-  constructor(content: GameContent, options: { seed?: number; scheduler?: FrameScheduler } = {}) {
-    super(newGame(content, options.seed))
+  /** `initialState`: state dựng từ bản lưu (SaveController.restore). Không có thì bắt đầu ván mới. */
+  constructor(content: GameContent, options: { seed?: number; scheduler?: FrameScheduler; initialState?: GameState } = {}) {
+    super(options.initialState ?? newGame(content, options.seed))
     this.content = content
     this.scheduler = options.scheduler ?? browserScheduler
   }

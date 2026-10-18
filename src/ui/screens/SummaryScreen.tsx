@@ -1,9 +1,9 @@
 import { motion } from 'motion/react'
 import { content } from '../../content'
-import { game } from '../../controllers'
+import { game, profile } from '../../controllers'
 import { summarizeDay, todayStories } from '../../engine/game'
 import { useStore } from '../../hooks/useStore'
-import { money, signedMoney } from '../format'
+import { money, renderLine, signedMoney } from '../format'
 
 export function SummaryScreen() {
   // Buổi tối state không đổi theo đồng hồ, nên đọc nguyên state ở đây không tốn gì
@@ -11,6 +11,7 @@ export function SummaryScreen() {
   const s = summarizeDay(state)
   const stories = todayStories(state, content)
   const isLast = state.day >= state.lastDay
+  const me = useStore(profile, (p) => p)
 
   return (
     <motion.div className="flex flex-1 flex-col gap-5" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
@@ -46,7 +47,7 @@ export function SummaryScreen() {
             {stories.map((st, i) => (
               <li key={i} className="flex flex-col">
                 <span className="font-semibold">{st.customer}</span>
-                <span className="text-ink-soft">Bạn đáp: “{st.said}”</span>
+                <span className="text-ink-soft">Bạn đáp: “{renderLine(st.said, me)}”</span>
               </li>
             ))}
           </ul>

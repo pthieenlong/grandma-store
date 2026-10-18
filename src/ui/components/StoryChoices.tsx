@@ -1,10 +1,12 @@
 import { motion } from 'motion/react'
-import { game } from '../../controllers'
+import { game, profile } from '../../controllers'
 import { useStore } from '../../hooks/useStore'
+import { renderLine } from '../format'
 
 /** 3 câu trả lời khi khách kể chuyện. */
 export function StoryChoices() {
   const choices = useStore(game, (s) => (s.current?.status === 'story' ? s.current.visit.story?.choices : undefined))
+  const me = useStore(profile, (p) => p)
   if (!choices) return null
 
   return (
@@ -24,7 +26,7 @@ export function StoryChoices() {
             onClick={() => game.choose(i)}
             className="btn-3d btn-soft min-h-[54px] rounded-[18px]! px-4 py-3 text-left font-body! text-[15px] leading-snug font-medium!"
           >
-            {choice.text}
+            {renderLine(choice.text, me)}
           </button>
         </motion.div>
       ))}
