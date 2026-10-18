@@ -1,0 +1,47 @@
+{
+  "id": "intro",
+  "doneLabel": "Mở cửa tiệm",
+  "pages": [
+    {
+      "title": "Sài Gòn",
+      "lines": [
+        "Mười một giờ đêm. Văn phòng chỉ còn mình với cái máy lạnh kêu rè rè.",
+        "Điện thoại sáng lên: “{name} ơi, sếp kêu sửa lại slide, sáng mai nộp nha.”",
+        "Mình không nhớ nổi lần cuối được ăn bữa cơm nhà là hồi nào."
+      ]
+    },
+    {
+      "title": "Cuộc gọi",
+      "lines": [
+        "Mẹ gọi lúc gần sáng.",
+        "“Con ơi… bà ngoại mất rồi.”",
+        "Mình nộp đơn nghỉ ngay sáng đó, bắt chuyến xe đò sớm nhất về quê.",
+        "Đứng trước quan tài, mình mới nhớ ra đã bao nhiêu năm không về thăm bà."
+      ]
+    },
+    {
+      "title": "Căn nhà",
+      "lines": [
+        "Mẹ nói bà dặn để căn nhà với cái tiệm lại cho con.",
+        "Hồi nhỏ, hè nào mình cũng về, ngồi sau quầy đếm kẹo me với bà.",
+        "“Tết này cả nhà về nhà bà ăn Tết nghen,” mẹ nói. “Cái Tết đầu tiên không có bà.”"
+      ]
+    },
+    {
+      "title": "Ở lại",
+      "lines": [
+        "Đám xong, cả nhà ai về nhà nấy. Mình ở lại.",
+        "Từ hồi bà yếu, tiệm đóng cửa. Mấy hũ kẹo trên quầy còn nguyên nắp.",
+        "Tối đó, mình thắp một cây nhang. “Bà ơi, con ở lại với bà nghen.”"
+      ]
+    },
+    {
+      "title": "Sáng hôm sau",
+      "lines": [
+        "Sáu giờ sáng. Ngoài kia đã có tiếng xe đạp, tiếng ai gọi nhau đi chợ.",
+        "Trong kho còn ít hàng bà nhập dở.",
+        "Mình kéo cửa sắt lên."
+      ]
+    }
+  ]
+}

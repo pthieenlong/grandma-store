@@ -16,7 +16,8 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 |---|---|
 | Thể loại | Game quản lí cửa hàng theo ngày + lựa chọn hội thoại, chơi trên điện thoại (trình duyệt) |
 | Mục tiêu dự án | **Làm vì vui.** Không bán, không lên app store. Ưu tiên giữ hứng thú và làm xong từng phần chơi được. |
-| Nhân vật chính | Đứa cháu ở Sài Gòn, áp lực công việc nên về quê (lấy cảm hứng Stardew Valley, nhưng đặt ở Việt Nam). |
+| Nhân vật chính | Đứa cháu ở Sài Gòn, áp lực công việc nên về quê (lấy cảm hứng Stardew Valley, nhưng đặt ở Việt Nam). Người chơi đặt tên, chọn cháu trai / cháu gái. |
+| Mở đầu (intro) | Nghe tin bà mất thì **nộp đơn nghỉ việc ngay**, về **kịp đám tang**; đứng trước quan tài mới nhớ ra bao năm không về thăm bà. Bà để nhà và tiệm cho cháu. Mẹ hẹn "Tết này cả nhà về nhà bà ăn Tết". Đám xong, cả nhà về, người chơi ở lại; tiệm đóng cửa từ hồi bà yếu. (Long chọn bản B, Claude viết nháp) |
 | Premise | Bà ngoại **đã mất**, để lại căn nhà và tiệm tạp hoá. Bà không xuất hiện trong game. |
 | Động lực | Giữ nơi ở và kỷ niệm của bà, song song với xây dựng tình cảm với dân làng. |
 | Xung đột | Một công ty bất động sản muốn mua đất cả làng để xây resort, cho hạn tới **Tết**. |
@@ -89,7 +90,7 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 | Nút tạm dừng | Dừng mọi thứ: đồng hồ, kiên nhẫn. | Claude (mặc định) |
 | Màn tạm dừng | Chỉnh âm lượng nhạc nền / hiệu ứng, tắt tiếng, giảm chuyển động ngay tại chỗ. Esc để chơi tiếp. Không có "Chơi lại" hay "Hướng dẫn". | Long |
 | Tự tạm dừng khi rời app | Chuyển tab / khoá màn hình thì tự tạm dừng; quay lại thấy màn tạm dừng, phải tự bấm "Chơi tiếp". Buổi tối (Tổng kết) thì không ảnh hưởng. | Long |
-| Màn mở đầu | Tên game + "Mở cửa tiệm". Đồng hồ chỉ chạy sau khi bấm. Cú chạm này dùng để mở khoá âm thanh trên điện thoại (bước 4). | Long |
+| Màn mở đầu | Tên game + "Bắt đầu" (có bản lưu thì "Chơi tiếp" / "Ván mới", mục 4.7). Đồng hồ chỉ chạy khi vào tiệm. Cú chạm đầu tiên dùng để mở khoá âm thanh trên điện thoại. "Mở cửa tiệm" giờ là nút cuối intro. | Long (nút "Bắt đầu": Claude) |
 | Tab bị ẩn thì tự dừng | Dùng `requestAnimationFrame`, không cộng dồn `setInterval`. Từ v0.4 còn bật luôn `paused` (xem dòng "Tự tạm dừng khi rời app"). | Claude (kỹ thuật) |
 
 ### 4.2 Khách hàng
@@ -156,6 +157,30 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 - Kho còn lại.
 - Nút "Thắp nhang cho bà, đi ngủ" để sang ngày mới. Ngày cuối là "Đón Tết".
 
+### 4.8 Nhân vật và intro
+
+| Luật | Giá trị | Ai chọn |
+|---|---|---|
+| Tạo nhân vật | Nhập tên (tối đa 16 ký tự) + chọn **Cháu trai / Cháu gái**. | Long (Nam/Nữ), Claude (chữ "Cháu trai/gái") |
+| Luồng ván mới | Màn mở đầu → Tạo nhân vật (điền sẵn hồ sơ cũ) → Intro 5 trang → Ngày 1. Bản lưu cũ chỉ bị ghi đè ở cuối intro: tải lại trang giữa chừng vẫn còn ván cũ. | Long (thứ tự), Claude (lúc ghi đè) |
+| Intro | 5 trang trong `content/scenes/intro.json`, bấm "Tiếp" để qua, có "Bỏ qua". Không có hướng dẫn chơi. | Long |
+| Lưu hồ sơ | Tên + giới tính lưu localStorage riêng (`tiem-ba-ngoai:profile:v1`), không nằm trong bản lưu game. | Long |
+| Bản lưu cũ chưa có hồ sơ | "Chơi tiếp" thì tạo nhân vật trước, không xem intro. | Claude (mặc định) |
+| Cú pháp trong câu thoại | `{name}` và `{nam|nữ}` (vd `{Thằng|Con nhỏ} này`), dùng được ở mọi câu kể cả mẫu câu khách vô danh. Thay lúc hiển thị (`renderLine` trong `ui/format.ts`), engine giữ câu gốc. | Long |
+| Xưng hô theo giới tính | Đã sửa: Cô Hai (ngày 1, 2), Ông Bảy, Anh Sáu, Thằng Tí, người mặc vest, "Con nhỏ xóm dưới". Cô Hai ngày 1 nhắc chuyện đám tang ("Bữa đám bà đông quá…") vì người chơi đã về dự đám. | Claude |
+
+### 4.7 Lưu game
+
+| Luật | Giá trị | Ai chọn |
+|---|---|---|
+| Lưu đầu mỗi ngày | Bản lưu luôn là đầu một ngày. F5 giữa ngày thì chơi lại ngày đó từ đầu (tiền, kho về như lúc mở cửa). | Long |
+| Lưu lúc nào | Bấm "Mở cửa tiệm"/ván mới (lưu ngày 1), đóng cửa (lưu luôn đầu ngày mai), sang ngày mới. Không ghi theo nhịp đồng hồ. | Claude (kỹ thuật) |
+| F5 ở màn Tổng kết | Vào thẳng ngày mai, bỏ qua màn Tổng kết (tiền, kho đã tính xong). Riêng tối ngày cuối: chơi lại ngày cuối. | Claude (mặc định) |
+| Hết game | Bấm "Đón Tết" thì xoá bản lưu. | Claude (mặc định) |
+| Chỉ lưu vài con số | `{ version, seed, day, money, inventory }`. Lịch khách dựng lại bằng `startDay` từ seed, nên sửa content JSON không làm hỏng bản lưu cũ. Món mới trong `items.json` thì kho = 0. | Claude (kỹ thuật) |
+| Màn mở đầu | Chưa có bản lưu: "Mở cửa tiệm". Có bản lưu: "Chơi tiếp (Ngày X)" + "Ván mới", Ván mới phải xác nhận vì xoá bản lưu. | Long |
+| Bản lưu hỏng / sai version | Coi như chưa có bản lưu, không báo lỗi. | Claude (mặc định) |
+
 ---
 
 ## 5. Hoãn lại / chưa làm
@@ -169,10 +194,22 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 | Tính cách NPC (`traits`) | Chưa làm. |
 | Kỷ niệm về bà | Mới có nhãn trên UI, chưa có nội dung. |
 | Màn Làng (danh sách hộ + Gắn bó) | Có trong wireframe, chưa code. |
-| Lưu game | Chưa có. Tải lại trang là chơi lại từ đầu. |
+| Lưu game | Đã có (mục 4.7). Mới lưu tiến độ ngày; Gắn bó, flag câu chuyện khi làm thì phải thêm vào `SaveData` (tăng `SAVE_VERSION`). |
 | Asset thật | Đã có icon món hàng, khung cảnh tiệm, tủ kính. Nhân vật vẫn là SVG tạm, âm thanh là placeholder tổng hợp. |
 
+**Đã chốt, chưa làm (18/10/2026):**
+
+| Quyết định | Nội dung | Ai chọn |
+|---|---|---|
+| 33 ngày, đếm ngược từ ngày 4 | 3 ngày đầu không hiện đếm ngược. Tối ngày 3 → sáng ngày 4 có **cảnh riêng** (dùng lại `SceneScreen`, vd thư thông báo thu mua đất nhét dưới cửa, hạn trước Tết), lúc đó mới hiện "Còn 30 ngày tới Tết". `LAST_DAY` thành 33. | Long |
+| Lựa chọn có hậu quả | Hướng B: choice set flag, visit sau đọc flag (lời hứa "mai ông qua" được thực hiện). | Long |
+| Bible | Bible của cả làng (không chỉ của bà), viết trước dàn ý 30 ngày. | Long |
+| Tết | Dàn ý 30 ngày có sự kiện Tết và bán hàng Tết (món mới → phải cân lại kinh tế). | Long |
+
 **Edge case đã ghi nhận, chưa xử lý:**
+- Khách ngẫu nhiên có story kể lại y nguyên câu chuyện mỗi ngày (Tí "được điểm mười", người mặc vest "chủ tiệm mới hả?"): `buildQueue` không nhớ ai đã kể. Từ ngày 4 sẽ lộ rõ.
+- Người mặc vest (khách ngẫu nhiên từ ngày 2) tự giới thiệu "làm bên dự án" trước cảnh công ty ngày 4: xem lại `minDay` hoặc câu chuyện khi làm cảnh đó.
+- Ông Bảy ngày 1: ông lỡ đám tang, người chơi thì có mặt. Có thể thêm lựa chọn "Con kể ông nghe bữa đám bà nha". Long chưa quyết.
 - ~~Hết giờ mà khách mang story vẫn còn trong hàng đợi thì mất story đó.~~ Đã xử lý ở v0.4: khách có tên được lên lịch trước 16h.
 - Khách vô danh lặp tên khá nhiều trong một ngày (8 vai, khoảng 9–10 lượt), câu chào chỉ có 4 mẫu. Thêm vai và mẫu câu trong `fillers.json` khi thấy nhàm.
 - Kinh tế: khách gấp đôi nên doanh thu/ngày gần gấp đôi v0.3, sau khi giảm gap còn tăng thêm (khoảng 20–25 khách/ngày). Chưa chỉnh lại giá hay tiền khởi đầu. Hàng cũng hết nhanh hơn.
@@ -225,7 +262,7 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 | Mọi thay đổi tiền/kho đi qua `Outcome` | Màn Tổng kết chỉ đọc `todayLog`. Thêm Gắn bó chỉ cần điền `bondDeltas`. | Claude (kiến trúc) |
 | Content viết bằng JSON | Thêm ngày mới = thêm file `day-XX.json`, không sửa code. | Claude đề xuất, Long đồng ý |
 | Mọi con số cân bằng nằm trong `config.ts` | Chỉnh một chỗ khi tự chơi thử. | Claude (kiến trúc) |
-| Test bằng Vitest | 66 test (engine, GameController với scheduler giả, SettingsController với storage giả, AudioController với sound factory giả). | Claude (kỹ thuật) |
+| Test bằng Vitest | 94 test (engine, GameController với scheduler giả, SettingsController với storage giả, AudioController với sound factory giả). | Claude (kỹ thuật) |
 | Build single-file | `npm run build:single` gộp thành 1 file HTML để mở thử trên điện thoại. | Claude (kỹ thuật) |
 | Thư viện `motion` cho animation | Exit animation (`AnimatePresence`) và spring dễ hơn CSS thuần. Đánh đổi: thêm dependency. Lưu ý: đừng đặt `motion.*` lên chung element với `.btn-3d`, vì motion ghi `transform` inline đè hiệu ứng lún khi bấm; bọc `motion.div` bên ngoài. | Long |
 | Chưa dùng Ink | Từng gợi ý Ink cho story phân nhánh. Hiện story chỉ 1 tầng (3 lựa chọn → 1 câu đáp) nên JSON là đủ. Cân nhắc lại khi có hội thoại nhiều tầng. | Claude đề xuất |
@@ -239,15 +276,23 @@ Khi đổi luật game, cập nhật file này cùng lúc với code.
 | v0.1 | Vòng lặp 1 ngày: khách tới từng người, kiên nhẫn, nút "Bán", nhập hàng, tổng kết. 3 ngày kịch bản. |
 | v0.2 | Bỏ nút "Bán": tự chọn món trên kệ, khay, đưa hàng. Đọc yêu cầu qua câu thoại. Đưa nhầm bị phạt kiên nhẫn. |
 | v0.3 | Bán thành công thì khách kể chuyện, 3 câu trả lời. 12 câu chuyện. Mục "Chuyện hôm nay". |
-| v0.4 (đang làm) | Đồng hồ 6h–20h, trời đổi màu theo giờ. Khách tới liên tục (khách vô danh tự sinh), khách có chuyện rải đều trước 17h, ẩn số khách. Animation bằng `motion`. Chuyển sang kiến trúc controller, tách ShopScreen để render theo từng phần (bước 2/4, render nhanh hơn khoảng 7 lần). Màn mở đầu, màn tạm dừng, SettingsController (bước 3/4). Âm thanh placeholder bằng Howler (bước 4/4). Asset AI gen đầu tiên: icon món hàng, khung cảnh tiệm, tủ kính. |
+| v0.4 (đang làm) | Đồng hồ 6h–20h, trời đổi màu theo giờ. Khách tới liên tục (khách vô danh tự sinh), khách có chuyện rải đều trước 17h, ẩn số khách. Animation bằng `motion`. Chuyển sang kiến trúc controller, tách ShopScreen để render theo từng phần (bước 2/4, render nhanh hơn khoảng 7 lần). Màn mở đầu, màn tạm dừng, SettingsController (bước 3/4). Âm thanh placeholder bằng Howler (bước 4/4). Asset AI gen đầu tiên: icon món hàng, khung cảnh tiệm, tủ kính. Lưu game đầu mỗi ngày, màn mở đầu Chơi tiếp / Ván mới. Tạo nhân vật (tên, cháu trai/gái), intro 5 trang, cú pháp `{name}` / `{nam|nữ}` trong câu thoại. |
 
 ---
 
-## 9. Bước tiếp theo (gợi ý, chưa chốt thứ tự)
+## 9. Bước tiếp theo
 
-1. **Chơi thử và chỉnh số liệu:** 5 phút/ngày, kiên nhẫn, phạt đưa nhầm có quá gắt không.
-2. **Hệ thống Gắn bó:** model `Household`, gắn điểm vào lựa chọn câu chuyện, giảm dần mỗi ngày, màn Làng.
-3. **Win/fail:** chốt ngưỡng thắng, số hộ, có tính phá sản không.
-4. **Lưu game** (localStorage), để chơi nhiều phiên.
-5. **Viết thêm kịch bản** ngày 4 trở đi.
-6. **Gen asset thật** khi gameplay đã ổn định.
+**Thứ tự Long chốt (18/10/2026), phần câu chuyện:**
+
+1. ~~Lưu game~~ (xong, mục 4.7).
+2. ~~Tạo nhân vật + Intro~~ (xong, mục 4.8).
+3. **Cảnh công ty ngày 4 + 33 ngày** (mục 5, "Đã chốt, chưa làm").
+4. **Sửa lỗi khách ngẫu nhiên lặp story.**
+5. **Flag cho lựa chọn** (hướng B).
+6. **Bible của làng**, rồi **dàn ý 33 ngày** kèm sự kiện + hàng Tết.
+
+**Chưa xếp thứ tự:**
+- Chơi thử và chỉnh số liệu: 5 phút/ngày, kiên nhẫn, phạt đưa nhầm có quá gắt không.
+- Hệ thống Gắn bó: model `Household`, gắn điểm vào lựa chọn câu chuyện, giảm dần mỗi ngày, màn Làng.
+- Win/fail: chốt ngưỡng thắng, số hộ, có tính phá sản không.
+- Gen asset thật khi gameplay đã ổn định.

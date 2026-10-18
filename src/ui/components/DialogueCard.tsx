@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
-import { game } from '../../controllers'
+import { game, profile } from '../../controllers'
 import { useStore } from '../../hooks/useStore'
-import { money } from '../format'
+import { money, renderLine } from '../format'
 import { selectSold, selectWrongCount } from '../selectors'
 import { PatienceBar } from './PatienceBar'
 
@@ -12,6 +12,7 @@ export function DialogueCard() {
   const waiting = useStore(game, (s) => s.current?.status === 'waiting')
   const wrongCount = useStore(game, selectWrongCount)
   const sold = useStore(game, selectSold)
+  const me = useStore(profile, (p) => p)
 
   return (
     <section className="clay flex flex-col gap-2 px-5 py-4" aria-live="polite">
@@ -35,7 +36,7 @@ export function DialogueCard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25 }}
       >
-        {line}
+        {line && renderLine(line, me)}
       </motion.p>
     </section>
   )

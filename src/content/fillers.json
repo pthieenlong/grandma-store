@@ -7,7 +7,7 @@
     { "name": "Cô hàng bông", "self": "cô", "player": "con" },
     { "name": "Anh chạy ghe", "self": "anh", "player": "em" },
     { "name": "Chị đi chợ sớm", "self": "chị", "player": "em" },
-    { "name": "Con nhỏ xóm dưới", "self": "con", "player": "anh" }
+    { "name": "Con nhỏ xóm dưới", "self": "con", "player": "{anh|chị}" }
   ],
   "items": {
     "mi-goi": { "weight": 4, "maxQty": 5 },

@@ -72,6 +72,15 @@ export type GameContent = {
   fillers: FillerContent
 }
 
+/** Một trang trong cảnh kể chuyện (intro, sau này là sự kiện giữa các ngày). Câu có thể chứa {name}, {nam|nữ}. */
+export type ScenePage = { title: string; lines: string[] }
+
+export type Scene = {
+  id: string
+  pages: ScenePage[]
+  doneLabel: string // chữ trên nút ở trang cuối
+}
+
 // ===== Trạng thái game (thay đổi khi chơi) =====
 
 export type Inventory = Record<ItemId, number>
@@ -113,6 +122,7 @@ export type GameState = {
   elapsedMs: number
   money: number
   startMoney: number // tiền đầu ngày, cho màn Tổng kết
+  startInventory: Inventory // kho đầu ngày, để lưu game (bản lưu luôn là đầu một ngày)
   inventory: Inventory
   queue: QueuedVisit[] // chỉ khách có tên; khách vô danh sinh lúc quầy trống
   current: CurrentVisit | null
